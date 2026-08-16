@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#5856d6" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="description"
+      content="Free, accurate CGPA, SGPA and percentage calculator for engineering students in Tamil Nadu, India. REC, SSN, RIT, MIT, CEG, SKCET. Anna University regulations and latest curricula."
+    />
+    <meta
+      name="keywords"
+      content="cgpa calculator, sgpa calculator, percentage calculator, anna university cgpa calculator, REC cgpa calculator, SSN cgpa calculator, RIT cgpa calculator, MIT cgpa calculator, CEG cgpa calculator, SKCET cgpa calculator, rajalakshmi engineering college cgpa, tamil nadu engineering cgpa, engineering students India"
+    />
+    <meta name="application-name" content="CGPA Calculator" />
+    <meta name="apple-mobile-web-app-title" content="CGPA Calculator" />
+    <title>CGPA Calculator | SGPA, CGPA and Percentage for Engineering Students</title>
+    <link rel="canonical" href="https://tams-cgpa-calculator.vercel.app/" />
+
+    <!-- Open Graph (Discord, WhatsApp, Instagram, Facebook, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CGPA Calculator" />
+    <meta
+      property="og:title"
+      content="CGPA Calculator | SGPA, CGPA and Percentage for Engineering Students"
+    />
+    <meta
+      property="og:description"
+      content="Enter your grades once and get an accurate CGPA, SGPA and percentage with Anna University and Tamil Nadu engineering curricula (REC, SSN, RIT, MIT, CEG, SKCET)."
+    />
+    <meta property="og:url" content="https://tams-cgpa-calculator.vercel.app/" />
+    <meta property="og:image" content="https://tams-cgpa-calculator.vercel.app/og-card.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="CGPA Calculator - SGPA, CGPA and percentage calculator for engineering students"
+    />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="CGPA Calculator | SGPA, CGPA and Percentage for Engineering Students"
+    />
+    <meta
+      name="twitter:description"
+      content="Enter your grades once and get an accurate CGPA, SGPA and percentage with Anna University and Tamil Nadu engineering curricula."
+    />
+    <meta name="twitter:image" content="https://tams-cgpa-calculator.vercel.app/og-card.png" />
+    <meta
+      name="twitter:image:alt"
+      content="CGPA Calculator - SGPA, CGPA and percentage calculator for engineering students"
+    />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebApplication",
+            "name": "CGPA Calculator",
+            "url": "https://tams-cgpa-calculator.vercel.app/",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "Web",
+            "description": "Accurate CGPA, SGPA and percentage calculator for engineering students in Tamil Nadu, India. Regulation-aware subject-by-subject entry for Anna University and affiliated college curricula, with the latest regulations and every department.",
+            "audience": {
+              "@type": "EducationalAudience",
+              "educationalRole": "student"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What's the difference between SGPA and CGPA?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "SGPA is your Grade Point Average for a single semester. CGPA is the credit-weighted average of every semester so far. Enter your grades for the current semester (or a single overall SGPA for past semesters) and both update as you type."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How is my percentage calculated?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It depends on the regulation. For older batches the standard Anna University formula is (CGPA \u2212 0.75) \u00D7 10; for newer batches it's CGPA \u00D7 10. The exact formula used is always shown next to your percentage in the summary card."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "My college isn't listed yet. When will it be added?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "New colleges are added regularly. Rajalakshmi Engineering College (REC) is live now, with more coming soon. If your college follows Anna University regulations, which most engineering programmes in Tamil Nadu do, you can still pick REC and get accurate results today."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which colleges does it support?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "REC, SSN, RIT, MIT, CEG and SKCET. Rajalakshmi Engineering College (REC) is live now and the rest are on the way. If your college follows Anna University regulations, the calculator uses the official grade scale and credit structure, so results stay accurate."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is my data private?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Everything is stored only in your browser's local storage. No accounts, no servers, no analytics. Clearing your browser data removes everything."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I fill past semesters?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Past semesters use an SGPA shortcut. Enter your overall SGPA for each semester and your CGPA updates instantly. Use subject-by-subject entry only for the current semester to see how each grade affects your CGPA."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why don't some grades count towards CGPA?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Grades like U (arrear), SA (shortage of attendance) and WD (withdrawal) carry no credit points, so they're left out of the average, exactly like the published grading scheme. Mandatory non-credit courses are excluded entirely."
+                }
+              }
+            ]
+          },
+          {
+            "@type": "Organization",
+            "name": "CGPA Calculator",
+            "url": "https://tams-cgpa-calculator.vercel.app/",
+            "founder": {
+              "@type": "Person",
+              "name": "Tamil Selvan",
+              "alternateName": "Tams3d",
+              "description": "Frontend developer and B.E. Computer Science and Engineering student at Rajalakshmi Engineering College.",
+              "url": "https://tamilselvanportfolio.vercel.app",
+              "sameAs": [
+                "https://github.com/Tams3d",
+                "https://www.linkedin.com/in/tamilselvan29",
+                "https://discord.com/users/947461185530372146",
+                "https://www.behance.net/tamilselvan3d",
+                "https://www.youtube.com/@tams3d"
+              ]
+            }
+          }
+        ]
+      }
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("cgpa-theme");
+          var dark =
+            t === "dark" ||
+            ((t === "system" || t === null) &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.classList.add(dark ? "dark" : "light");
+          document.documentElement.style.colorScheme = dark ? "dark" : "light";
+          document
+            .querySelector('meta[name="theme-color"]')
+            ?.setAttribute("content", dark ? "#08090a" : "#5856d6");
+        } catch (e) {
+          document.documentElement.classList.add("light");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <noscript>
+        <main
+          style="
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem;
+            font-family: system-ui, sans-serif;
+            line-height: 1.6;
+          "
+        >
+          <h1>CGPA Calculator for Engineering Students</h1>
+          <p>
+            A free, regulation-aware SGPA, CGPA and percentage calculator. Pick your college,
+            department, batch and semester, enter your grades once, and see your CGPA update
+            instantly.
+          </p>
+          <p>
+            Supports subject-by-subject entry for the current semester and an overall SGPA shortcut
+            for past semesters, with Anna University and affiliated college curricula for
+            engineering programmes in Tamil Nadu.
+          </p>
+          <h2>Key features</h2>
+          <ul>
+            <li>Subject-by-subject grade entry with official grade scales</li>
+            <li>SGPA shortcut for past semesters</li>
+            <li>Regulation-aware credit structures and grade points</li>
+            <li>CGPA to percentage conversion with the published formula</li>
+            <li>Private by default, everything is saved in your browser</li>
+          </ul>
+          <h2>How is my CGPA calculated?</h2>
+          <p>
+            SGPA is the credit-weighted average of grade points for one semester. CGPA is the
+            credit-weighted average across every semester so far. Courses like audit subjects and
+            non-credit courses are excluded, exactly like the published grading scheme.
+          </p>
+          <p>This site requires JavaScript. Enable it to use the interactive calculator.</p>
+        </main>
+      </noscript>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

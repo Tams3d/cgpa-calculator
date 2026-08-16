@@ -1,0 +1,151 @@
+import { DEPARTMENTS } from "@/data/departments";
+import { COLLEGES } from "@/data/colleges";
+import { percentageFormulaLabel, formatDecimal } from "@/lib/cgpa";
+import { useCgpaStore } from "@/hooks/use-cgpa-store";
+import { SiteHeader } from "@/components/landing/site-header";
+import { HeroSection } from "@/components/landing/hero";
+import { StatsSection } from "@/components/landing/stats-section";
+import { LogoCloud } from "@/components/landing/logo-cloud";
+import { FeaturesSection } from "@/components/landing/features";
+import { FaqSection } from "@/components/landing/faq";
+import { SiteFooter, SiteWatermark } from "@/components/landing/site-footer";
+import { CalculatorSection } from "@/components/calculator/calculator-section";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
+
+const DEPARTMENT_COUNT = DEPARTMENTS.length;
+const COURSE_COUNT = DEPARTMENTS.reduce(
+  (sum, d) =>
+    sum +
+    d.curricula.reduce((s, c) => s + c.semesters.reduce((t, sem) => t + sem.courses.length, 0), 0),
+  0,
+);
+
+export default function App() {
+  const {
+    college,
+    department,
+    curriculum,
+    gradeScale,
+    activeSemester,
+    totalProgramCredits,
+    totals,
+    activeComputed,
+    currentSemesterSgpa,
+    previousCgpa,
+    gradedSemesterCount,
+    percentage,
+    pastSemesters,
+    hasAnyGrades,
+    openSemesterNumber,
+    onCollegeChange,
+    onDepartmentChange,
+    onCurriculumChange,
+    onSemesterSelect,
+    onToggleSemester,
+    onGradeChange,
+    onSgpaChange,
+    onReset,
+  } = useCgpaStore();
+
+  const percentageLabel = percentageFormulaLabel(curriculum);
+
+  return (
+    <div className="flex min-h-dvh flex-col pb-[calc(env(safe-area-inset-bottom)+4.5rem)] md:pb-0">
+      <a
+        href="#main"
+        className="sr-only z-50 focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
+      >
+        Skip to content
+      </a>
+
+      <SiteHeader />
+
+      <main id="main" className="flex-1 scroll-mt-14">
+        <HeroSection
+          liveCgpa={hasAnyGrades ? totals.cgpa : null}
+          livePercentage={hasAnyGrades ? percentage : null}
+          liveSgpa={hasAnyGrades ? currentSemesterSgpa : null}
+          collegeName={college.name}
+          departmentLabel={department.name}
+          regulation={curriculum.regulation}
+          creditsCompleted={totals.creditsCompleted}
+          totalProgramCredits={totalProgramCredits}
+        />
+
+        <StatsSection departmentCount={DEPARTMENT_COUNT} courseCount={COURSE_COUNT} />
+
+        <LogoCloud />
+
+        <FeaturesSection />
+
+        <CalculatorSection
+          college={college}
+          colleges={COLLEGES}
+          department={department}
+          curriculum={curriculum}
+          gradeScale={gradeScale}
+          activeSemester={activeSemester}
+          totalProgramCredits={totalProgramCredits}
+          activeComputed={activeComputed}
+          totals={totals}
+          currentSemesterSgpa={currentSemesterSgpa}
+          previousCgpa={previousCgpa}
+          gradedSemesterCount={gradedSemesterCount}
+          percentage={percentage}
+          percentageLabel={percentageLabel}
+          pastSemesters={pastSemesters}
+          openSemesterNumber={openSemesterNumber}
+          onCollegeChange={onCollegeChange}
+          onDepartmentChange={onDepartmentChange}
+          onCurriculumChange={onCurriculumChange}
+          onSemesterSelect={onSemesterSelect}
+          onToggleSemester={onToggleSemester}
+          onGradeChange={onGradeChange}
+          onSgpaChange={onSgpaChange}
+          onReset={onReset}
+        />
+
+        <FaqSection />
+      </main>
+
+      <SiteFooter />
+      <SiteWatermark />
+
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/90 px-4 pb-[calc(env(safe-area-inset-bottom)+0.625rem)] pt-2.5 backdrop-blur supports-backdrop-filter:bg-background/80 md:hidden">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-3">
+          <div className="flex min-w-0 items-baseline gap-2">
+            <span className="shrink-0 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              CGPA
+            </span>
+            {totals.cgpa !== null ? (
+              <span className="font-mono text-2xl font-bold leading-none text-primary tabular-nums">
+                {formatDecimal(totals.cgpa)}
+              </span>
+            ) : (
+              <span className="truncate text-sm font-semibold text-muted-foreground">
+                No grades yet
+              </span>
+            )}
+            {percentage !== null && (
+              <span className="shrink-0 text-sm font-semibold text-muted-foreground tabular-nums">
+                {percentage.toFixed(1)}%
+              </span>
+            )}
+          </div>
+          <div className="shrink-0 text-right">
+            <span className="text-xs text-muted-foreground">SGPA</span>
+            {currentSemesterSgpa !== null ? (
+              <span className="ml-1.5 font-mono text-lg font-bold tabular-nums">
+                {formatDecimal(currentSemesterSgpa)}
+              </span>
+            ) : (
+              <span className="ml-1.5 text-xs font-medium text-muted-foreground">Not entered</span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <ThemeToggle />
+    </div>
+  );
+}

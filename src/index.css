@@ -1,0 +1,348 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@property --background {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fafafb;
+}
+@property --foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1b1c1e;
+}
+@property --card {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --card-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1b1c1e;
+}
+@property --popover {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --popover-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1b1c1e;
+}
+@property --primary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #5856d6;
+}
+@property --primary-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --secondary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f1f1f3;
+}
+@property --secondary-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #3a3b3e;
+}
+@property --muted {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f1f1f3;
+}
+@property --muted-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #6e7076;
+}
+@property --accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ededf0;
+}
+@property --accent-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #5856d6;
+}
+@property --destructive {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ff3b30;
+}
+@property --destructive-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --success {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #34c759;
+}
+@property --success-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --info {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #007aff;
+}
+@property --info-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --bg-hover {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f2f2f4;
+}
+@property --border {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #e4e4e7;
+}
+@property --input {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #e4e4e7;
+}
+@property --ring {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #5856d6;
+}
+
+:root {
+  --background: #fafafb;
+  --foreground: #1b1c1e;
+  --card: #ffffff;
+  --card-foreground: #1b1c1e;
+  --popover: #ffffff;
+  --popover-foreground: #1b1c1e;
+  --primary: #5856d6;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f1f3;
+  --secondary-foreground: #3a3b3e;
+  --muted: #f1f1f3;
+  --muted-foreground: #6e7076;
+  --accent: #ededf0;
+  --accent-foreground: #5856d6;
+  --destructive: #ff3b30;
+  --destructive-foreground: #ffffff;
+  --success: #34c759;
+  --success-foreground: #ffffff;
+  --info: #007aff;
+  --info-foreground: #ffffff;
+  --bg-hover: #f2f2f4;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #5856d6;
+  --radius: 0.375rem;
+}
+
+.dark {
+  --background: #08090a;
+  --foreground: #ececee;
+  --card: #0e0f10;
+  --card-foreground: #ececee;
+  --popover: #0e0f10;
+  --popover-foreground: #ececee;
+  --primary: #5e5ce6;
+  --primary-foreground: #ffffff;
+  --secondary: #151617;
+  --secondary-foreground: #d8d9db;
+  --muted: #131415;
+  --muted-foreground: #8a8c90;
+  --accent: #1a1b1d;
+  --accent-foreground: #5e5ce6;
+  --destructive: #ff453a;
+  --destructive-foreground: #ffffff;
+  --success: #30d158;
+  --success-foreground: #ffffff;
+  --info: #0a84ff;
+  --info-foreground: #ffffff;
+  --bg-hover: #161718;
+  --border: #1f2023;
+  --input: #26282b;
+  --ring: #5e5ce6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-bg-hover: var(--bg-hover);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+@theme {
+  --shadow-xs: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 12px -2px rgb(15 23 42 / 0.06);
+  --shadow-md: 0 2px 4px rgb(15 23 42 / 0.05), 0 8px 24px -4px rgb(15 23 42 / 0.1);
+  --shadow-lg: 0 4px 8px rgb(15 23 42 / 0.06), 0 16px 40px -8px rgb(15 23 42 / 0.14);
+  --shadow-xl: 0 8px 16px rgb(15 23 42 / 0.08), 0 32px 64px -12px rgb(15 23 42 / 0.2);
+}
+
+.dark {
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 12px -2px rgb(0 0 0 / 0.2);
+  --shadow-md: 0 2px 4px rgb(0 0 0 / 0.25), 0 8px 24px -4px rgb(0 0 0 / 0.15);
+  --shadow-lg: 0 4px 8px rgb(0 0 0 / 0.2), 0 16px 40px -8px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 8px 16px rgb(0 0 0 / 0.16), 0 32px 64px -12px rgb(0 0 0 / 0.08);
+}
+
+@theme {
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--accordion-panel-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--accordion-panel-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    overflow-x: clip;
+  }
+  body[data-scroll-locked] {
+    margin-right: 0 !important;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  html.theme-transition {
+    transition:
+      --background 250ms ease,
+      --foreground 250ms ease,
+      --card 250ms ease,
+      --card-foreground 250ms ease,
+      --popover 250ms ease,
+      --popover-foreground 250ms ease,
+      --primary 250ms ease,
+      --primary-foreground 250ms ease,
+      --secondary 250ms ease,
+      --secondary-foreground 250ms ease,
+      --muted 250ms ease,
+      --muted-foreground 250ms ease,
+      --accent 250ms ease,
+      --accent-foreground 250ms ease,
+      --destructive 250ms ease,
+      --destructive-foreground 250ms ease,
+      --success 250ms ease,
+      --success-foreground 250ms ease,
+      --info 250ms ease,
+      --info-foreground 250ms ease,
+      --bg-hover 250ms ease,
+      --border 250ms ease,
+      --input 250ms ease,
+      --ring 250ms ease;
+  }
+  button,
+  [role="button"],
+  a {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  button,
+  [role="button"],
+  a:not([href="#main"]),
+  summary {
+    cursor: pointer;
+  }
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transition {
+    transition: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background-color: var(--color-border);
+}

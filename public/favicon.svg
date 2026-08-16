@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#1b1c1e"/>
+  <g stroke="#ffffff" stroke-width="5" stroke-linecap="round" fill="none">
+    <line x1="14" y1="44" x2="14" y2="32"/>
+    <line x1="25" y1="44" x2="25" y2="27"/>
+    <line x1="36" y1="44" x2="36" y2="21"/>
+    <line x1="47" y1="44" x2="47" y2="15"/>
+    <line x1="10" y1="49" x2="54" y2="49" opacity="0.55"/>
+  </g>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      rect { fill: #ececee; }
+      g { stroke: #1b1c1e; }
+    }
+  </style>
+</svg>

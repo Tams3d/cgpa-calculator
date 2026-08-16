@@ -1,0 +1,46 @@
+User-agent: *
+Allow: /
+
+# AI crawlers are allowed: all content is public and safe to cite.
+# Any AI crawler not listed below is already covered by the default Allow rule.
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google (standard crawl + AI-extended)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft
+User-agent: Bingbot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Common Crawl (training data)
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://tams-cgpa-calculator.vercel.app/sitemap.xml

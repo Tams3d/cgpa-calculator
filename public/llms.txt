@@ -1,0 +1,24 @@
+# CGPA Calculator
+
+> A free, regulation-aware SGPA, CGPA and percentage calculator for engineering students in Tamil Nadu, India. Pick your college, department, batch and semester, enter grades once, and SGPA, CGPA and percentage update instantly.
+
+Single-page app: every calculation runs in the browser and results are stored in localStorage. No account, no server, no analytics.
+
+Key facts:
+
+- Curricula follow Anna University regulations and are mapped subject-by-subject for 19 departments (CSE to Robotics) across two grade scales: R2023 and R2025.
+- Only Rajalakshmi Engineering College (REC) is live. SSN, RIT, MIT, CEG and SKCET are listed as coming soon.
+- SGPA is the credit-weighted average of grade points in one semester.
+- CGPA is the credit-weighted average of grade points across every semester.
+- Percentage uses the published formula per regulation: (CGPA - 0.75) x 10 for older batches, CGPA x 10 for newer batches.
+- Grades U (arrear), SA (shortage of attendance), WD/WC (withdrawal) and mandatory non-credit courses never count toward CGPA.
+
+## Pages
+
+- [CGPA Calculator](https://tams-cgpa-calculator.vercel.app/): Interactive calculator with college, department, batch and semester selection; subject-by-subject grade entry for the current semester, an overall SGPA shortcut for past semesters, and a live CGPA, SGPA and percentage summary.
+
+## Contact
+
+- [GitHub](https://github.com/Tams3d): Author Tams3d
+- [LinkedIn](https://www.linkedin.com/in/tamilselvan29): Author Tamilselvan
+- [Portfolio](https://tamilselvanportfolio.vercel.app): Author's website
