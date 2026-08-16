@@ -53,7 +53,7 @@ export default function App() {
     <div className="flex min-h-dvh flex-col pb-[calc(env(safe-area-inset-bottom)+4.5rem)] md:pb-0">
       <a
         href="#main"
-        className="sr-only z-50 focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
+        className="sr-only z-50 focus:fixed focus:top-3 focus:left-3 focus:m-0 focus:size-auto focus:overflow-visible focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:whitespace-normal focus:text-primary-foreground focus:[clip-path:none]"
       >
         Skip to content
       </a>
@@ -111,14 +111,14 @@ export default function App() {
       <SiteFooter />
       <SiteWatermark />
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/90 px-4 pb-[calc(env(safe-area-inset-bottom)+0.625rem)] pt-2.5 backdrop-blur supports-backdrop-filter:bg-background/80 md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-background px-4 pt-2.5 pb-[calc(env(safe-area-inset-bottom)+0.625rem)] md:hidden">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-3">
           <div className="flex min-w-0 items-baseline gap-2">
-            <span className="shrink-0 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <span className="shrink-0 text-xs font-medium tracking-wide text-muted-foreground uppercase">
               CGPA
             </span>
             {totals.cgpa !== null ? (
-              <span className="font-mono text-2xl font-bold leading-none text-primary tabular-nums">
+              <span className="font-mono text-2xl leading-none font-bold text-primary tabular-nums">
                 {formatDecimal(totals.cgpa)}
               </span>
             ) : (

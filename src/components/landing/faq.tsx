@@ -59,10 +59,10 @@ const FAQS: FaqItem[] = [
 
 export const FaqSection = memo(function FaqSection() {
   return (
-    <section id="faq" className="scroll-mt-14 border-b-0 py-16 md:py-20 sm:border-b">
+    <section id="faq" className="scroll-mt-14 border-b-0 py-16 sm:border-b md:py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-6">
         <div className="grid gap-10 md:grid-cols-2 md:gap-6">
-          <h2 className="max-w-sm text-balance font-display text-4xl font-semibold tracking-tight text-foreground">
+          <h2 className="max-w-sm font-display text-4xl font-semibold tracking-tight text-balance text-foreground">
             Frequently asked questions
           </h2>
 

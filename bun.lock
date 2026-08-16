@@ -24,6 +24,7 @@
         "@vitejs/plugin-react": "^6.0.4",
         "oxfmt": "^0.63.0",
         "oxlint": "^1.75.0",
+        "oxlint-tailwindcss": "^1.9.0",
         "react-scan": "^0.5.7",
         "typescript": "~6.0.2",
         "vite": "^8.2.0",
@@ -716,6 +717,8 @@
     "oxlint": ["oxlint@1.78.0", "", { "optionalDependencies": { "@oxlint/binding-android-arm-eabi": "1.78.0", "@oxlint/binding-android-arm64": "1.78.0", "@oxlint/binding-darwin-arm64": "1.78.0", "@oxlint/binding-darwin-x64": "1.78.0", "@oxlint/binding-freebsd-x64": "1.78.0", "@oxlint/binding-linux-arm-gnueabihf": "1.78.0", "@oxlint/binding-linux-arm-musleabihf": "1.78.0", "@oxlint/binding-linux-arm64-gnu": "1.78.0", "@oxlint/binding-linux-arm64-musl": "1.78.0", "@oxlint/binding-linux-ppc64-gnu": "1.78.0", "@oxlint/binding-linux-riscv64-gnu": "1.78.0", "@oxlint/binding-linux-riscv64-musl": "1.78.0", "@oxlint/binding-linux-s390x-gnu": "1.78.0", "@oxlint/binding-linux-x64-gnu": "1.78.0", "@oxlint/binding-linux-x64-musl": "1.78.0", "@oxlint/binding-openharmony-arm64": "1.78.0", "@oxlint/binding-win32-arm64-msvc": "1.78.0", "@oxlint/binding-win32-ia32-msvc": "1.78.0", "@oxlint/binding-win32-x64-msvc": "1.78.0" }, "peerDependencies": { "oxlint-tsgolint": ">=7.0.2001", "vite-plus": "*" }, "optionalPeers": ["oxlint-tsgolint", "vite-plus"], "bin": { "oxlint": "bin/oxlint" } }, "sha512-QgQePuxIqKOzo1KSjG2EnITEeWvWnKAm77eq8nrMtf6AGoA+zyGc4PFYtDNJSD25g/ibOwfQ851hZ4/SPkMVoA=="],
 
     "oxlint-plugin-react-doctor": ["oxlint-plugin-react-doctor@0.9.11", "", { "dependencies": { "@shaderfrog/glsl-parser": "^7.0.1", "@typescript-eslint/types": "^8.59.3", "eslint-scope": "^9.1.2", "eslint-visitor-keys": "^5.0.1", "lightningcss": "^1.33.0", "oxc-parser": "^0.142.0" } }, "sha512-ZhW15wfFjQlUwAO6zG3jVZKse4/PBTCArhbibiidHmTlvOpPHPM1AjdYG13023pfsbbtVdy7Tb7KHfqbKt8rHg=="],
+
+    "oxlint-tailwindcss": ["oxlint-tailwindcss@1.9.0", "", { "dependencies": { "@tailwindcss/node": "^4.3.3", "tailwindcss": "^4.3.3" } }, "sha512-6Zp5AiKPWpkt/HOtvHP3VtmWO2vrl5PAY3DPNker771RUwp5TEHZKRrQ3yCQnSEbCRWrqaVbkBf1pWiIVpms+w=="],
 
     "p-limit": ["p-limit@3.1.0", "", { "dependencies": { "yocto-queue": "^0.1.0" } }, "sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ=="],
 

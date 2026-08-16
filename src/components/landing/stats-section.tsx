@@ -18,7 +18,7 @@ export const StatsSection = memo(function StatsSection({
   return (
     <section className="py-16 md:py-20">
       <div className="mx-auto max-w-5xl px-5 sm:px-6">
-        <div className="mx-auto max-w-xl text-balance text-center">
+        <div className="mx-auto max-w-xl text-center text-balance">
           <h2 className="font-display text-4xl font-semibold tracking-tight text-foreground">
             Every credit counts.
           </h2>

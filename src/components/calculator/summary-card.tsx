@@ -62,7 +62,7 @@ export const CgpaSummaryCard = memo(function CgpaSummaryCard({
           {noGradesYet ? (
             <p className="mt-1 text-sm font-medium text-muted-foreground">No grades yet</p>
           ) : (
-            <p className="mt-1.5 font-mono text-3xl font-bold leading-none tracking-tight text-success tabular-nums sm:text-5xl">
+            <p className="mt-1.5 font-mono text-3xl leading-none font-bold tracking-tight text-success tabular-nums sm:text-5xl">
               {formatDecimal(totals.cgpa)}
             </p>
           )}
@@ -72,7 +72,7 @@ export const CgpaSummaryCard = memo(function CgpaSummaryCard({
           <div className="flex flex-col gap-1 rounded-xl border bg-secondary/60 p-3.5">
             <p className="text-xs font-medium text-muted-foreground">Previous CGPA</p>
             {hasPreviousCgpa ? (
-              <p className="font-display text-xl font-bold tabular-nums leading-none text-info sm:text-2xl">
+              <p className="font-display text-xl leading-none font-bold text-info tabular-nums sm:text-2xl">
                 {formatDecimal(previousCgpa)}
               </p>
             ) : (
@@ -85,7 +85,7 @@ export const CgpaSummaryCard = memo(function CgpaSummaryCard({
           <div className="flex flex-col gap-1 rounded-xl border bg-secondary/60 p-3.5">
             <p className="text-xs font-medium text-muted-foreground">This semester</p>
             {currentSemesterSgpa !== null ? (
-              <p className="font-display text-xl font-bold tabular-nums leading-none text-success sm:text-2xl">
+              <p className="font-display text-xl leading-none font-bold text-success tabular-nums sm:text-2xl">
                 {formatDecimal(currentSemesterSgpa)}
               </p>
             ) : (

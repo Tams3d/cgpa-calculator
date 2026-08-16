@@ -38,7 +38,7 @@ export const HeroSection = memo(function HeroSection({
     <section id="top" className="relative overflow-hidden border-b">
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-primary/[0.03]" />
 
-      <div className="mx-auto w-full max-w-7xl px-5 pb-12 pt-10 sm:px-6 md:pb-16 md:pt-12">
+      <div className="mx-auto w-full max-w-7xl px-5 pt-10 pb-12 sm:px-6 md:pt-12 md:pb-16">
         <div className="mx-auto max-w-3xl text-center">
           <a
             href="#calculator"
@@ -58,11 +58,11 @@ export const HeroSection = memo(function HeroSection({
             </span>
           </a>
 
-          <h1 className="mx-auto mt-6 max-w-3xl font-display text-5xl font-semibold leading-[1.05] tracking-tight text-balance text-foreground md:text-6xl">
+          <h1 className="mx-auto mt-6 max-w-3xl font-display text-5xl leading-[1.05] font-semibold tracking-tight text-balance text-foreground md:text-6xl">
             Know your CGPA, down to the <span className="text-primary">decimal</span>.
           </h1>
 
-          <p className="mx-auto mt-4 max-w-xl text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-balance text-muted-foreground md:text-lg">
             Pick your college, department and year. Enter grades once. SGPA, CGPA and percentage
             update instantly.
           </p>
@@ -72,7 +72,7 @@ export const HeroSection = memo(function HeroSection({
               href="#calculator"
               className={cn(
                 buttonVariants({ variant: "default", size: "sm" }),
-                "w-full sm:w-auto sm:size-lg",
+                "w-full sm:h-9 sm:w-auto",
               )}
             >
               Start calculating
@@ -82,7 +82,7 @@ export const HeroSection = memo(function HeroSection({
               href="#faq"
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "w-full sm:w-auto sm:size-lg",
+                "w-full sm:h-9 sm:w-auto",
               )}
             >
               How CGPA is calculated
@@ -102,7 +102,7 @@ export const HeroSection = memo(function HeroSection({
 
             <div className="mt-3 flex items-end justify-between gap-4">
               <div>
-                <p className="font-mono text-6xl font-bold leading-none tracking-tight text-foreground tabular-nums sm:text-7xl">
+                <p className="font-mono text-6xl leading-none font-bold tracking-tight text-foreground tabular-nums sm:text-7xl">
                   {formatDecimal(cgpa)}
                 </p>
                 <p className="mt-1.5 text-base text-muted-foreground">
@@ -118,7 +118,7 @@ export const HeroSection = memo(function HeroSection({
             <div className="mt-4 flex flex-col gap-1.5">
               <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <span>Credits completed</span>
-                <span className="font-mono text-sm font-semibold tabular-nums text-foreground">
+                <span className="font-mono text-sm font-semibold text-foreground tabular-nums">
                   {creditsCompleted}/{totalProgramCredits}
                 </span>
               </div>
@@ -144,7 +144,7 @@ export const HeroSection = memo(function HeroSection({
               </div>
               <div className="rounded-lg border bg-secondary px-3 py-2">
                 <p className="text-xs text-muted-foreground">Regulation</p>
-                <p className="font-mono text-2xl font-bold tabular-nums text-foreground">
+                <p className="font-mono text-2xl font-bold text-foreground tabular-nums">
                   {regulation}
                 </p>
               </div>

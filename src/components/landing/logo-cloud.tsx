@@ -7,9 +7,9 @@ const LOGOS: Record<string, string> = {
 
 export const LogoCloud = memo(function LogoCloud() {
   return (
-    <section className="border-b-0 py-16 md:py-20 sm:border-b">
+    <section className="border-b-0 py-16 sm:border-b md:py-20">
       <div className="mx-auto max-w-5xl px-5 sm:px-6">
-        <div className="mx-auto mb-12 max-w-xl text-balance text-center md:mb-16">
+        <div className="mx-auto mb-12 max-w-xl text-center text-balance md:mb-16">
           <h2 className="font-display text-4xl font-semibold tracking-tight text-foreground">
             Colleges supported
           </h2>

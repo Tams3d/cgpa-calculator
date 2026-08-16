@@ -66,7 +66,7 @@ export const FeaturesSection = memo(function FeaturesSection() {
             title="Why it adds up"
             description="No spreadsheets, no grade points to memorise. Your exact CGPA, instantly."
           />
-          <dl className="mt-8 grid grid-cols-2 gap-6 @2xl:grid-cols-3 @2xl:gap-10 *:space-y-2 *:text-balance *:text-center *:text-sm">
+          <dl className="mt-8 grid grid-cols-2 gap-6 *:space-y-2 *:text-center *:text-sm *:text-balance @2xl:grid-cols-3 @2xl:gap-10">
             {FEATURES.map((feature) => (
               <div key={feature.title}>
                 <FeatureIcon {...feature} />

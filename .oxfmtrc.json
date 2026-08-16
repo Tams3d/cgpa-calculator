@@ -11,5 +11,9 @@
   "jsxSingleQuote": false,
   "tabWidth": 2,
   "trailingComma": "all",
-  "useTabs": false
+  "useTabs": false,
+  "sortTailwindcss": {
+    "stylesheet": "./src/index.css",
+    "functions": ["cn", "clsx"]
+  }
 }

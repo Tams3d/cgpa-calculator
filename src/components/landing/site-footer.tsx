@@ -58,7 +58,7 @@ export const SiteFooter = memo(function SiteFooter() {
 export const SiteWatermark = memo(function SiteWatermark() {
   return (
     <div aria-hidden className="overflow-hidden">
-      <div className="translate-y-[22.5%] mask-[linear-gradient(to_bottom,black_0%,white_50%,transparent_100%)] select-none whitespace-nowrap text-balance text-center text-[15.5vw] font-semibold leading-none tracking-tighter">
+      <div className="translate-y-[22.5%] mask-[linear-gradient(to_bottom,black_0%,white_50%,transparent_100%)] text-center text-[15.5vw] leading-none font-semibold tracking-tighter text-balance whitespace-nowrap select-none">
         TAMILSELVAN
       </div>
     </div>

@@ -37,11 +37,11 @@ export const CourseGradeRow = memo(function CourseGradeRow({
   ];
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-transparent px-2 py-2 transition-colors hover:border-primary/40 hover:bg-secondary/70 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+    <div className="flex flex-col gap-3 rounded-md border border-transparent p-2 transition-colors hover:border-primary/40 hover:bg-secondary/70 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
       <div className="flex min-w-0 items-center gap-3">
         <Badge
           variant="outline"
-          className="w-14 shrink-0 justify-center border-foreground/20 font-mono text-[11px] uppercase tracking-wide "
+          className="w-14 shrink-0 justify-center border-foreground/20 font-mono text-[11px] tracking-wide uppercase"
         >
           {code}
         </Badge>
@@ -61,7 +61,7 @@ export const CourseGradeRow = memo(function CourseGradeRow({
         >
           <SelectTrigger
             aria-label={`${code} ${title} grade`}
-            className="h-9 min-w-0 flex-1 max-w-full sm:w-44"
+            className="h-9 max-w-full min-w-0 flex-1 sm:w-44"
           >
             <SelectValue placeholder="Choose grade" />
           </SelectTrigger>

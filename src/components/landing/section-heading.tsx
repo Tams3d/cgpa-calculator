@@ -14,7 +14,7 @@ export const SectionHeading = memo(function SectionHeading({
   return (
     <div className="max-w-2xl">
       {eyebrow && (
-        <p className="font-display text-sm font-semibold uppercase tracking-wider text-primary">
+        <p className="font-display text-sm font-semibold tracking-wider text-primary uppercase">
           {eyebrow}
         </p>
       )}

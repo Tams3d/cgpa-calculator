@@ -56,8 +56,10 @@ export const CourseDetailsCard = memo(function CourseDetailsCard({
     disabled: c.available === false,
   }));
 
+  const branchName = (name: string) => name.replace(/^B\.(E|Tech)\.\s*/i, "");
+
   const departmentItems = college.departments
-    .toSorted((a, b) => a.name.localeCompare(b.name))
+    .toSorted((a, b) => branchName(a.name).localeCompare(branchName(b.name)))
     .map((d) => ({ label: d.name, value: d.id }));
 
   const curriculumItems = department.curricula.map((c) => ({

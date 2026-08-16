@@ -22,7 +22,7 @@ export const FieldLabel = memo(function FieldLabel({
       id={id}
       htmlFor={htmlFor}
       className={cn(
-        "text-xs font-semibold uppercase tracking-wider text-muted-foreground",
+        "text-xs font-semibold tracking-wider text-muted-foreground uppercase",
         className,
       )}
     >
