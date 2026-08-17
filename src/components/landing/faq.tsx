@@ -1,4 +1,5 @@
 ﻿import { memo } from "react";
+import type { ReactNode } from "react";
 import type { College } from "@/types/curriculum";
 import {
   Accordion,
@@ -7,13 +8,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+const REPO_URL = "https://github.com/Tams3d/cgpa-calculator";
+
 interface FaqItem {
   id: string;
   question: string;
-  answer: string;
+  answer: ReactNode;
 }
-
-const REPO_URL = "https://github.com/Tams3d/cgpa-calculator";
 
 function joinNames(names: string[]): string {
   if (names.length <= 1) return names.join("");
@@ -32,58 +33,55 @@ function buildFaqs(college: College, colleges: College[]): FaqItem[] {
   const collegeStatusLine = isSelectedLive
     ? `${college.name} is fully supported, so you can start entering grades right away.`
     : college.autonomy === "non-autonomous"
-      ? "If your college is non-autonomous and follows Anna University regulations, pick CEG or MIT - they share the same curriculum, so your results will be accurate."
+      ? "If your college is non-autonomous and follows Anna University regulations, pick CEG or MIT — they share the same curriculum, so your results will be accurate."
       : "Autonomous colleges set their own curriculum, so they need their own course data before they can be listed.";
-
-  const contributeLine =
-    "This project is open source under the MIT license. To add your college, open an issue or a pull request at " +
-    REPO_URL;
 
   return [
     {
-      id: "faq-sgpa-cgpa",
-      question: "What is the difference between SGPA and CGPA?",
+      id: "faq-cgpa",
+      question: "How is my CGPA calculated?",
       answer:
-        "SGPA is the credit-weighted average of grade points for one semester. CGPA is the same average rolled up across every semester so far. This tool shows both and updates them as you pick grades.",
+        "CGPA is the credit-weighted average of your grade points across every semester so far, while SGPA is the same average for a single semester. This tool shows both and updates them live as you pick grades.",
     },
     {
       id: "faq-percentage",
       question: "How is my percentage calculated?",
       answer:
-        "It depends on your regulation. Older batches use (CGPA - 0.75) x 10 and newer batches use CGPA x 10. The exact formula used is shown next to your percentage, so you always know how it was derived.",
-    },
-    {
-      id: "faq-past-semesters",
-      question: "How do I fill in my past semesters?",
-      answer:
-        "Enter the overall SGPA for each past semester and your CGPA updates instantly. You do not need to re-enter every course from earlier years.",
-    },
-    {
-      id: "faq-exempt-grades",
-      question: "Why do some grades not count towards CGPA?",
-      answer:
-        "WD (withdrawal) carries no credit points, so it is left out. U (arrear) and SA (shortage of attendance) are carried forward instead: they show up in every later semester until you clear them with a passing grade, exactly like the official grading scheme.",
-    },
-    {
-      id: "faq-college-list",
-      question: "Which colleges does it support?",
-      answer: `Live now: ${liveList}. ${comingSoonList ? `${comingSoonList} are on the way.` : ""}`,
+        "It depends on your regulation. Older batches use (CGPA - 0.75) x 10 and newer batches use CGPA x 10. The exact formula used is shown next to your percentage.",
     },
     {
       id: "faq-college",
-      question: "My college is not in the list. What can I do?",
-      answer: `${collegeStatusLine} ${contributeLine}`,
-    },
-    {
-      id: "faq-contribute",
-      question: "How can I contribute a new college?",
-      answer: `${contributeLine} Curriculum data lives in plain TypeScript files, so adding a college is mostly data entry. Any fix or improvement is welcome.`,
+      question: "Which colleges are supported?",
+      answer: (
+        <>
+          Live now: {liveList}.{comingSoonList ? ` ${comingSoonList} are on the way.` : ""} Not
+          listed? {collegeStatusLine}
+        </>
+      ),
     },
     {
       id: "faq-privacy",
       question: "Is my data safe?",
       answer:
-        "Yes. Your grades stay only in your browser's local storage; there are no accounts and no servers. Clearing your browser data removes everything.",
+        "Yes. Your grades stay only in your browser's local storage. There are no accounts and no servers, and clearing your browser data removes everything.",
+    },
+    {
+      id: "faq-contribute",
+      question: "How can I contribute?",
+      answer: (
+        <>
+          This project is open source under the MIT license. Curriculum data lives in plain
+          TypeScript files, so adding a college is mostly data entry.{" "}
+          <a
+            href={REPO_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-primary underline underline-offset-2 hover:text-primary/80"
+          >
+            Contribute on GitHub
+          </a>
+        </>
+      ),
     },
   ];
 }

@@ -18,10 +18,14 @@ export const SectionHeading = memo(function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className="mt-2 font-display text-4xl font-semibold tracking-tight text-foreground">
+      <h2 className="mt-2 font-display text-4xl font-semibold tracking-tight text-balance text-foreground">
         {title}
       </h2>
-      {description && <p className="mt-2 text-base text-muted-foreground">{description}</p>}
+      {description && (
+        <p className="mt-2 text-base leading-relaxed text-pretty text-muted-foreground">
+          {description}
+        </p>
+      )}
     </div>
   );
 });

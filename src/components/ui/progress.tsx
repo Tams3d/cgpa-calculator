@@ -18,7 +18,7 @@ function Progress({
       value={value}
       aria-label={ariaLabel}
       data-slot="progress"
-      className={cn("flex flex-wrap gap-3", className)}
+      className={cn("w-full", className)}
       {...props}
     >
       {children}

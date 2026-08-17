@@ -24,24 +24,19 @@ export const LogoCloud = memo(function LogoCloud() {
         </div>
 
         <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-x-8 gap-y-6">
-          {COLLEGES.flatMap((college) => {
-            const logo = LOGOS[college.id];
-            return logo
-              ? [
-                  <span key={college.id} className="flex items-center justify-center">
-                    <img
-                      src={logo}
-                      alt={college.name}
-                      width={1600}
-                      height={800}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-20 w-auto max-w-full object-contain"
-                    />
-                  </span>,
-                ]
-              : [];
-          })}
+          {COLLEGES.filter((college) => LOGOS[college.id]).map((college) => (
+            <span key={college.id} className="flex items-center justify-center">
+              <img
+                src={LOGOS[college.id]}
+                alt={college.name}
+                width={1600}
+                height={800}
+                loading="lazy"
+                decoding="async"
+                className="h-20 w-auto max-w-full object-contain"
+              />
+            </span>
+          ))}
         </div>
       </div>
     </section>

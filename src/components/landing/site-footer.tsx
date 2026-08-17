@@ -1,4 +1,4 @@
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import { GitHubMark, LinkedinMark, DiscordMark } from "@/components/ui/brand-icon";
 
 const SOCIAL_LINKS = [
@@ -8,13 +8,6 @@ const SOCIAL_LINKS = [
 ];
 
 export const SiteFooter = memo(function SiteFooter() {
-  useEffect(() => {
-    const el = document.getElementById("footer-email") as HTMLAnchorElement | null;
-    if (el) {
-      el.href = `mailto:${el.dataset.user}@${el.dataset.domain}`;
-    }
-  }, []);
-
   return (
     <footer className="mx-auto max-w-172.5 px-4 pt-4 pb-8 sm:px-6">
       <div className="flex flex-col items-center gap-6 text-center">
@@ -37,14 +30,11 @@ export const SiteFooter = memo(function SiteFooter() {
         <p className="max-w-xs text-sm text-muted-foreground">
           Down for hackathons, internships, and research. Wanna connect?{" "}
           <a
-            id="footer-email"
-            data-user="stamilselvan.tams"
-            data-domain="gmail.com"
+            href="mailto:stamilselvan.tams@gmail.com"
             className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors duration-200 hover:text-primary hover:decoration-primary"
           >
             Email me
           </a>
-          <noscript>stamilselvan.tams [at] gmail.com</noscript>
         </p>
 
         <p className="text-xs text-muted-foreground">

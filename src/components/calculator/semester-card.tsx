@@ -37,18 +37,19 @@ interface ModeSegmentedProps {
   semesterNumber: number;
 }
 
+const MODE_OPTIONS: { id: SemesterMode; label: string }[] = [
+  { id: "sgpa", label: "SGPA" },
+  { id: "subject", label: "Subject-wise" },
+];
+
 function ModeSegmented({ mode, onChange, semesterNumber }: ModeSegmentedProps) {
-  const options: { id: SemesterMode; label: string }[] = [
-    { id: "sgpa", label: "SGPA" },
-    { id: "subject", label: "Subject-wise" },
-  ];
   return (
     <div
       role="group"
       aria-label={`Semester ${semesterNumber} grade entry mode`}
       className="grid grid-cols-2 gap-1 rounded-lg bg-secondary/60 p-1"
     >
-      {options.map((option) => (
+      {MODE_OPTIONS.map((option) => (
         <button
           key={option.id}
           type="button"
@@ -116,22 +117,20 @@ function ArrearAddControl({
                 ))}
               </SelectContent>
             </Select>
-            <div className="flex w-full items-center justify-end gap-2 sm:w-auto sm:justify-start">
-              <Button
-                type="button"
-                size="sm"
-                className="w-full sm:w-auto"
-                disabled={subjectId === null}
-                onClick={() => {
-                  if (subjectId) {
-                    onAdd(subjectId);
-                    setSubjectId(null);
-                  }
-                }}
-              >
-                Add
-              </Button>
-            </div>
+            <Button
+              type="button"
+              size="sm"
+              className="w-full sm:w-auto"
+              disabled={subjectId === null}
+              onClick={() => {
+                if (subjectId) {
+                  onAdd(subjectId);
+                  setSubjectId(null);
+                }
+              }}
+            >
+              Add
+            </Button>
           </div>
         </>
       ) : (

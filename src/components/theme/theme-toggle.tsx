@@ -25,7 +25,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
             variant="outline"
             size="icon"
             className={cn(
-              "fixed right-8 bottom-24 z-100 rounded-lg bg-card shadow-sm md:right-8 md:bottom-6",
+              "fixed right-8 bottom-6 z-100 hidden rounded-lg bg-card shadow-sm md:inline-flex",
               className,
             )}
           />

@@ -108,7 +108,7 @@ export const CalculatorSection = memo(function CalculatorSection({
           description="Pick your college, department, year of admission and current semester. Enter each semester's grades as an overall SGPA or subject by subject, and record cleared arrears in the semester they were cleared."
         />
 
-        <div className="mt-8 grid grid-cols-1 items-start gap-4 md:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="mt-8 grid grid-cols-1 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="flex min-w-0 flex-col gap-4">
             <CourseDetailsCard
               college={college}
@@ -188,7 +188,7 @@ export const CalculatorSection = memo(function CalculatorSection({
             })}
           </div>
 
-          <div className="min-w-0 md:sticky md:top-20">
+          <div className="min-w-0 lg:sticky lg:top-20">
             <CgpaSummaryCard
               totals={totals}
               currentSemesterSgpa={currentSemesterSgpa}

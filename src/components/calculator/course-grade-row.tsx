@@ -29,13 +29,28 @@ export const CourseGradeRow = memo(function CourseGradeRow({
 }: CourseGradeRowProps) {
   const selected = value ? grades.find((g) => g.label === value) : undefined;
   const isArrearGrade = Boolean(value && selected && !selected.exempt && selected.points === 0);
+  const arrearGrades = grades.filter((g) => !g.exempt && g.points === 0);
+  const arrearValue = arrearGrades[0]?.label;
+  const arrearLabel = arrearGrades.length
+    ? `Arrear (${[
+        arrearGrades[0]!.label,
+        ...arrearGrades
+          .slice(1)
+          .map((g) => g.label)
+          .toSorted(),
+      ].join("/")})`
+    : null;
   const items = [
     { label: "No grade", value: "no-grade" },
-    ...grades.map((g) => ({
-      label: g.exempt ? `${g.label} (withheld)` : g.label,
-      value: g.label,
-    })),
+    ...grades
+      .filter((g) => g.points > 0 || g.exempt)
+      .map((g) => ({
+        label: g.exempt ? `${g.label} (withheld)` : g.label,
+        value: g.label,
+      })),
+    ...(arrearValue && arrearLabel ? [{ label: arrearLabel, value: arrearValue }] : []),
   ];
+  const displayValue = arrearGrades.some((g) => g.label === value) ? arrearValue : value;
 
   return (
     <div
@@ -65,7 +80,7 @@ export const CourseGradeRow = memo(function CourseGradeRow({
         </Badge>
         <Select
           items={items}
-          value={value}
+          value={displayValue}
           onValueChange={(v) => onChange(v === "no-grade" ? null : v)}
         >
           <SelectTrigger

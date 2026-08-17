@@ -63,7 +63,7 @@ export default function App() {
   const percentageLabel = percentageFormulaLabel(curriculum);
 
   return (
-    <div className="flex min-h-dvh flex-col pb-[calc(env(safe-area-inset-bottom)+4.5rem)] md:pb-0">
+    <div className="flex min-h-dvh flex-col pb-[calc(env(safe-area-inset-bottom)+5.5rem)] md:pb-0">
       <a
         href="#main"
         className="sr-only z-50 focus:fixed focus:top-3 focus:left-3 focus:m-0 focus:size-auto focus:overflow-visible focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:whitespace-normal focus:text-primary-foreground focus:[clip-path:none]"
@@ -77,10 +77,8 @@ export default function App() {
         <HeroSection
           liveCgpa={hasAnyGrades ? totals.cgpa : null}
           livePercentage={hasAnyGrades ? percentage : null}
-          liveSgpa={hasAnyGrades ? currentSemesterSgpa : null}
           collegeName={college.name}
           departmentLabel={department.name}
-          regulation={curriculum.regulation}
           creditsCompleted={totals.creditsCompleted}
           totalProgramCredits={totalProgramCredits}
         />
@@ -137,14 +135,14 @@ export default function App() {
       <SiteFooter />
       <SiteWatermark />
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-background px-4 pt-2.5 pb-[calc(env(safe-area-inset-bottom)+0.625rem)] md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-background px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] md:hidden">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-3">
           <div className="flex min-w-0 items-baseline gap-2">
             <span className="shrink-0 text-xs font-medium tracking-wide text-muted-foreground uppercase">
               CGPA
             </span>
             {totals.cgpa !== null ? (
-              <span className="font-mono text-2xl leading-none font-bold text-primary tabular-nums">
+              <span className="font-mono text-3xl leading-none font-bold text-primary tabular-nums">
                 {formatDecimal(totals.cgpa)}
               </span>
             ) : (
@@ -161,7 +159,7 @@ export default function App() {
           <div className="shrink-0 text-right">
             <span className="text-xs text-muted-foreground">SGPA</span>
             {currentSemesterSgpa !== null ? (
-              <span className="ml-1.5 font-mono text-lg font-bold tabular-nums">
+              <span className="ml-1.5 font-mono text-xl font-bold tabular-nums">
                 {formatDecimal(currentSemesterSgpa)}
               </span>
             ) : (

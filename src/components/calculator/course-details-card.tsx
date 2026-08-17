@@ -87,7 +87,7 @@ export const CourseDetailsCard = memo(function CourseDetailsCard({
     <Card>
       <CardHeader>
         <CardTitle className="text-lg font-bold tracking-tight">Course details</CardTitle>
-        <CardDescription>
+        <CardDescription className="text-pretty">
           For each semester, choose the overall SGPA or subject-wise grades. Cleared arrears are
           recorded in the semester they were cleared.
         </CardDescription>
@@ -118,8 +118,8 @@ export const CourseDetailsCard = memo(function CourseDetailsCard({
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className={cn("flex flex-col gap-2", !hasMultipleBatches && "sm:col-span-2")}>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className={cn("flex flex-col gap-2", !hasMultipleBatches && "lg:col-span-2")}>
             <FieldLabel as="label" id="dept-select" htmlFor="dept-select">
               Department
             </FieldLabel>

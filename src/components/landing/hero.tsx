@@ -8,31 +8,25 @@ import { cn } from "@/lib/utils";
 interface HeroSectionProps {
   liveCgpa: number | null;
   livePercentage: number | null;
-  liveSgpa: number | null;
   collegeName: string;
   departmentLabel: string;
-  regulation: string;
   creditsCompleted: number;
   totalProgramCredits: number;
 }
 
 const DEMO_CGPA = 8.75;
 const DEMO_PERCENTAGE = 88.15;
-const DEMO_SGPA = 8.9;
 
 export const HeroSection = memo(function HeroSection({
   liveCgpa,
   livePercentage,
-  liveSgpa,
   collegeName,
   departmentLabel,
-  regulation,
   creditsCompleted,
   totalProgramCredits,
 }: HeroSectionProps) {
   const cgpa = liveCgpa ?? DEMO_CGPA;
   const percentage = livePercentage ?? DEMO_PERCENTAGE;
-  const sgpa = liveSgpa ?? DEMO_SGPA;
 
   return (
     <section id="top" className="relative overflow-hidden border-b">
@@ -60,20 +54,14 @@ export const HeroSection = memo(function HeroSection({
           <div className="mt-6 flex flex-col items-center justify-center gap-2 md:flex-row">
             <a
               href="#calculator"
-              className={cn(
-                buttonVariants({ variant: "default", size: "sm" }),
-                "w-full sm:h-9 sm:w-auto",
-              )}
+              className={cn(buttonVariants({ variant: "default" }), "w-full sm:w-auto")}
             >
               Start calculating
               <ArrowRightIcon data-icon="inline-end" className="size-4" />
             </a>
             <a
               href="#faq"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "sm" }),
-                "w-full sm:h-9 sm:w-auto",
-              )}
+              className={cn(buttonVariants({ variant: "outline" }), "w-full sm:w-auto")}
             >
               How CGPA is calculated
             </a>
@@ -118,26 +106,6 @@ export const HeroSection = memo(function HeroSection({
                 ariaLabel="Credits completed"
                 indicatorClassName="bg-success"
               />
-            </div>
-
-            <div className="mt-4 grid grid-cols-2 gap-2.5">
-              <div className="rounded-lg border bg-secondary px-3 py-2">
-                <p className="text-xs text-muted-foreground">This semester &middot; SGPA</p>
-                <p
-                  className={cn(
-                    "font-mono text-2xl font-bold tabular-nums",
-                    liveSgpa !== null ? "text-success" : "text-foreground",
-                  )}
-                >
-                  {formatDecimal(sgpa)}
-                </p>
-              </div>
-              <div className="rounded-lg border bg-secondary px-3 py-2">
-                <p className="text-xs text-muted-foreground">Regulation</p>
-                <p className="font-mono text-2xl font-bold text-foreground tabular-nums">
-                  {regulation}
-                </p>
-              </div>
             </div>
           </div>
         </div>

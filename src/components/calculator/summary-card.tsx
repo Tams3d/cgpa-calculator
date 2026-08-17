@@ -40,7 +40,7 @@ export const CgpaSummaryCard = memo(function CgpaSummaryCard({
   const hasPreviousCgpa = previousCgpa !== null;
 
   return (
-    <Card className="shadow-sm">
+    <Card>
       <CardHeader className="p-4">
         <CardTitle className="flex items-center gap-2 text-sm">
           Your score
