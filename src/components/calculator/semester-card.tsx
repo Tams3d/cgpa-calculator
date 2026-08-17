@@ -98,9 +98,7 @@ function ArrearAddControl({
     <div className="flex w-full flex-col gap-2 rounded-lg border border-dashed border-border bg-secondary/30 p-3">
       {canAdd ? (
         <>
-          <span className="text-sm font-semibold text-foreground sm:hidden">
-            Add arrear subject
-          </span>
+          <span className="text-sm font-semibold text-foreground">Add arrear subjects</span>
           <div className="flex w-full flex-col gap-2 sm:flex-row sm:items-center">
             <Select items={items} value={subjectId} onValueChange={(v) => setSubjectId(v ?? null)}>
               <SelectTrigger
