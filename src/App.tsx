@@ -131,7 +131,7 @@ export default function App() {
           addedArrears={activeAddedArrears}
         />
 
-        <FaqSection />
+        <FaqSection college={college} colleges={COLLEGES} />
       </main>
 
       <SiteFooter />

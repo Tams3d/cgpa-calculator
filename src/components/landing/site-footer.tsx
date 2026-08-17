@@ -48,7 +48,7 @@ export const SiteFooter = memo(function SiteFooter() {
         </p>
 
         <p className="text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} Tamilselvan
+          Open source under the MIT license &middot; {new Date().getFullYear()} Tamilselvan
         </p>
       </div>
     </footer>
