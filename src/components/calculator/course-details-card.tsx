@@ -200,7 +200,7 @@ export const CourseDetailsCard = memo(function CourseDetailsCard({
                 key={n}
                 value={String(n)}
                 aria-label={`Semester ${n}`}
-                className="flex h-11 items-center justify-center rounded-lg border border-transparent font-display text-lg font-bold tabular-nums transition-colors hover:border-primary/30 hover:bg-primary/10 data-pressed:border-primary data-pressed:bg-primary data-pressed:text-primary-foreground data-pressed:shadow-sm"
+                className="flex h-9 items-center justify-center rounded-lg border border-transparent font-display text-lg font-bold tabular-nums transition-colors hover:border-primary/30 hover:bg-primary/10 data-pressed:border-primary data-pressed:bg-primary data-pressed:text-primary-foreground data-pressed:shadow-sm"
               >
                 {n}
               </ToggleGroupItem>
