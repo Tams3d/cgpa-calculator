@@ -172,11 +172,6 @@ export function computeTotals(results: SemesterComputed[]): TotalsComputed {
   };
 }
 
-/** Alias for the spec's naming: semester grade point average. */
-export const calculateSGPA = computeSemester;
-/** Alias for the spec's naming: cumulative grade point average. */
-export const calculateCGPA = computeTotals;
-
 /** Looks up a subject anywhere in a curriculum, returning its details and home semester. */
 function findCourse(
   curriculum: Curriculum,
