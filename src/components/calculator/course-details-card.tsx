@@ -94,13 +94,15 @@ export const CourseDetailsCard = memo(function CourseDetailsCard({
       </CardHeader>
       <CardContent className="flex flex-col gap-3.5">
         <div className="flex flex-col gap-2">
-          <FieldLabel id="college-select-label">College</FieldLabel>
+          <FieldLabel as="label" id="college-select" htmlFor="college-select">
+            College
+          </FieldLabel>
           <Select
             items={collegeItems}
             value={college.id}
             onValueChange={(v) => v && onCollegeChange(v)}
           >
-            <SelectTrigger id="college-select" aria-labelledby="college-select-label">
+            <SelectTrigger id="college-select" aria-label="College">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -118,13 +120,15 @@ export const CourseDetailsCard = memo(function CourseDetailsCard({
 
         <div className="grid gap-4 lg:grid-cols-2">
           <div className={cn("flex flex-col gap-2", !hasMultipleBatches && "lg:col-span-2")}>
-            <FieldLabel id="dept-select-label">Department</FieldLabel>
+            <FieldLabel as="label" id="dept-select" htmlFor="dept-select">
+              Department
+            </FieldLabel>
             <Select
               items={departmentItems}
               value={department.id}
               onValueChange={(v) => v && onDepartmentChange(v)}
             >
-              <SelectTrigger id="dept-select" aria-labelledby="dept-select-label">
+              <SelectTrigger id="dept-select" aria-label="Department">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -138,13 +142,15 @@ export const CourseDetailsCard = memo(function CourseDetailsCard({
           </div>
           {hasMultipleBatches && (
             <div className="flex flex-col gap-2">
-              <FieldLabel id="batch-select-label">Year of admission</FieldLabel>
+              <FieldLabel as="label" id="batch-select" htmlFor="batch-select">
+                Year of admission
+              </FieldLabel>
               <Select
                 items={curriculumItems}
                 value={curriculum.id}
                 onValueChange={(v) => v && onCurriculumChange(v)}
               >
-                <SelectTrigger id="batch-select" aria-labelledby="batch-select-label">
+                <SelectTrigger id="batch-select" aria-label="Year of admission">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
