@@ -36,6 +36,12 @@ export interface Curriculum {
   gradeScaleId: string;
   /** Which published formula converts CGPA to a percentage. Defaults to the standard Anna University formula. */
   percentageFormula?: "cgpa-x10" | "cgpa-minus-0.75-x10";
+  /**
+   * How backlog (arrear) grades are treated in the CGPA math.
+   * `zero` counts a failed course as 0 points in its own semester until cleared (official Anna University style).
+   * `exclude` drops it from the totals entirely until cleared, then adds it back. Defaults to `zero`.
+   */
+  arrearPolicy?: "zero" | "exclude";
   semesters: Semester[];
 }
 

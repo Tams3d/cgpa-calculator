@@ -42,20 +42,10 @@ export const HeroSection = memo(function HeroSection({
         <div className="mx-auto max-w-3xl text-center">
           <a
             href="#calculator"
-            className="group mx-auto flex w-fit items-center gap-3 rounded-full border border-border/70 bg-background/60 p-1 pl-4 shadow-sm backdrop-blur transition-colors duration-300"
+            className="mx-auto flex w-fit items-center gap-2 rounded-full border border-border/70 bg-background/60 px-4 py-1.5 shadow-sm backdrop-blur transition-colors duration-300 hover:border-primary/40"
           >
             <span className="text-sm font-semibold">New:</span>
             <span className="text-sm font-semibold text-muted-foreground">{collegeName}</span>
-            <span className="size-6 overflow-hidden rounded-full">
-              <span className="flex w-12 -translate-x-1/2 transition-transform duration-500 ease-in-out group-hover:translate-x-0">
-                <span className="flex size-6">
-                  <ArrowRightIcon className="m-auto size-3" aria-hidden />
-                </span>
-                <span className="flex size-6">
-                  <ArrowRightIcon className="m-auto size-3" aria-hidden />
-                </span>
-              </span>
-            </span>
           </a>
 
           <h1 className="mx-auto mt-6 max-w-3xl font-display text-5xl leading-[1.05] font-semibold tracking-tight text-balance text-foreground md:text-6xl">

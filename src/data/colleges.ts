@@ -1,5 +1,6 @@
 import type { College } from "@/types/curriculum";
 import { DEPARTMENTS } from "./departments";
+import { SSN_CSE, SSN_ECE, SSN_EEE, SSN_IT } from "./ssn";
 
 export const REC: College = {
   id: "rec",
@@ -47,7 +48,7 @@ export const SSN: College = {
   id: "ssn",
   name: "SSN College of Engineering",
   shortName: "SSN",
-  departments: DEPARTMENTS,
+  departments: [SSN_CSE, SSN_ECE, SSN_EEE, SSN_IT],
 };
 
 export const COLLEGES: College[] = [
@@ -57,5 +58,5 @@ export const COLLEGES: College[] = [
   { ...MIT, available: false },
   { ...SEC, available: false },
   { ...SKCET, available: false },
-  { ...SSN, available: false },
+  SSN,
 ];

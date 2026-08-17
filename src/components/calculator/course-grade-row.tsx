@@ -1,5 +1,6 @@
 ﻿import { memo } from "react";
 import type { Grade } from "@/types/curriculum";
+import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -15,8 +16,7 @@ interface CourseGradeRowProps {
   credits: number;
   grades: Grade[];
   value: string | null;
-  index: number;
-  onChange: (courseIndex: number, label: string | null) => void;
+  onChange: (label: string | null) => void;
 }
 
 export const CourseGradeRow = memo(function CourseGradeRow({
@@ -25,9 +25,10 @@ export const CourseGradeRow = memo(function CourseGradeRow({
   credits,
   grades,
   value,
-  index,
   onChange,
 }: CourseGradeRowProps) {
+  const selected = value ? grades.find((g) => g.label === value) : undefined;
+  const isArrearGrade = Boolean(value && selected && !selected.exempt && selected.points === 0);
   const items = [
     { label: "No grade", value: "no-grade" },
     ...grades.map((g) => ({
@@ -37,11 +38,19 @@ export const CourseGradeRow = memo(function CourseGradeRow({
   ];
 
   return (
-    <div className="flex flex-col gap-3 rounded-md border border-transparent p-2 transition-colors hover:border-primary/40 hover:bg-secondary/70 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-      <div className="flex min-w-0 items-center gap-3">
+    <div
+      className={cn(
+        "flex flex-col gap-3 rounded-md border p-2 transition-colors hover:border-primary/40 hover:bg-secondary/70 sm:flex-row sm:items-center sm:justify-between sm:gap-6",
+        isArrearGrade ? "border-destructive/40" : "border-transparent",
+      )}
+    >
+      <div className="flex min-w-0 flex-wrap items-center gap-3">
         <Badge
           variant="outline"
-          className="w-14 shrink-0 justify-center border-foreground/20 font-mono text-[11px] tracking-wide uppercase"
+          className={cn(
+            "w-14 shrink-0 justify-center border-foreground/20 font-mono text-[11px] tracking-wide uppercase",
+            isArrearGrade && "border-destructive/40 text-destructive",
+          )}
         >
           {code}
         </Badge>
@@ -57,11 +66,14 @@ export const CourseGradeRow = memo(function CourseGradeRow({
         <Select
           items={items}
           value={value}
-          onValueChange={(v) => onChange(index, v === "no-grade" ? null : v)}
+          onValueChange={(v) => onChange(v === "no-grade" ? null : v)}
         >
           <SelectTrigger
             aria-label={`${code} ${title} grade`}
-            className="h-9 max-w-full min-w-0 flex-1 sm:w-44"
+            className={cn(
+              "h-9 max-w-full min-w-0 flex-1 sm:w-44",
+              isArrearGrade && "text-destructive",
+            )}
           >
             <SelectValue placeholder="Choose grade" />
           </SelectTrigger>

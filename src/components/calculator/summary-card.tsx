@@ -17,6 +17,8 @@ interface CgpaSummaryCardProps {
   gradedSemesterCount: number;
   percentage: number | null;
   percentageLabel: string;
+  activeArrearCount: number;
+  clearedArrearCount: number;
   onReset: () => void;
 }
 
@@ -30,6 +32,8 @@ export const CgpaSummaryCard = memo(function CgpaSummaryCard({
   gradedSemesterCount,
   percentage,
   percentageLabel,
+  activeArrearCount,
+  clearedArrearCount,
   onReset,
 }: CgpaSummaryCardProps) {
   const noGradesYet = totals.cgpa === null;
@@ -92,6 +96,29 @@ export const CgpaSummaryCard = memo(function CgpaSummaryCard({
               <p className="text-sm font-medium text-muted-foreground">Not entered</p>
             )}
             <p className="text-xs leading-none text-muted-foreground">SGPA</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2.5">
+          <div className="flex flex-col gap-1 rounded-xl border bg-secondary/60 p-3.5">
+            <p className="text-xs font-medium text-muted-foreground">Active arrears</p>
+            {activeArrearCount > 0 ? (
+              <p className="font-display text-xl leading-none font-bold text-destructive tabular-nums sm:text-2xl">
+                {activeArrearCount}
+              </p>
+            ) : (
+              <p className="font-display text-xl leading-none font-bold text-success tabular-nums sm:text-2xl">
+                0
+              </p>
+            )}
+            <p className="text-xs leading-none text-muted-foreground">Not cleared yet</p>
+          </div>
+          <div className="flex flex-col gap-1 rounded-xl border bg-secondary/60 p-3.5">
+            <p className="text-xs font-medium text-muted-foreground">Cleared arrears</p>
+            <p className="font-display text-xl leading-none font-bold text-success tabular-nums sm:text-2xl">
+              {clearedArrearCount}
+            </p>
+            <p className="text-xs leading-none text-muted-foreground">Passed retakes</p>
           </div>
         </div>
 

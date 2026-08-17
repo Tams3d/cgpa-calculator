@@ -6,6 +6,11 @@ const LOGOS: Record<string, string> = {
 };
 
 export const LogoCloud = memo(function LogoCloud() {
+  const liveCollegeNames = COLLEGES.filter((c) => c.available !== false)
+    .map((c) => c.shortName)
+    .join(", ")
+    .replace(/, ([^,]*)$/, " and $1");
+
   return (
     <section className="border-b-0 py-16 sm:border-b md:py-20">
       <div className="mx-auto max-w-5xl px-5 sm:px-6">
@@ -13,7 +18,9 @@ export const LogoCloud = memo(function LogoCloud() {
           <h2 className="font-display text-4xl font-semibold tracking-tight text-foreground">
             Colleges supported
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">REC is live now. More coming soon.</p>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Live now: {liveCollegeNames}. More coming soon.
+          </p>
         </div>
 
         <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-x-8 gap-y-6">

@@ -35,13 +35,13 @@ const FAQS: FaqItem[] = [
     id: "faq-exempt-grades",
     question: "Why do some grades not count towards CGPA?",
     answer:
-      "Grades like U (arrear), SA (shortage of attendance) and WD (withdrawal) carry no credit points, so they are left out. Mandatory non-credit courses are excluded as well, exactly like the official grading scheme.",
+      "WD (withdrawal) carries no credit points, so it is left out. U (arrear) and SA (shortage of attendance) are carried forward instead: they show up in every later semester until you clear them with a passing grade, exactly like the official grading scheme.",
   },
   {
     id: "faq-college-list",
     question: "Which colleges does it support?",
     answer:
-      "REC, SSN, RIT, MIT, CEG and SKCET. Rajalakshmi Engineering College (REC) is live now and the rest are on the way.",
+      "REC, SSN, RIT, MIT, CEG and SKCET. REC and SSN are live now and the rest are on the way.",
   },
   {
     id: "faq-college",
@@ -53,7 +53,7 @@ const FAQS: FaqItem[] = [
     id: "faq-privacy",
     question: "Is my data safe?",
     answer:
-      "Yes. Everything stays in your browser\u2019s local storage. There are no accounts, no servers and no analytics, and clearing your browser data removes everything.",
+      "Yes. Your grades stay only in your browser's local storage; there are no accounts and no servers. The site uses Vercel Analytics to count visits in aggregate, and clearing your browser data removes everything.",
   },
 ];
 

@@ -2,10 +2,19 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { COLLEGES } from "@/data/colleges";
 import { GRADE_SCALES } from "@/data/gradeScales";
 import type { Curriculum, Department } from "@/types/curriculum";
-import type { SemesterEntry } from "@/types/storage";
-import type { PastSemesterView } from "@/types/computation";
+import type { SemesterEntry, SemesterMode } from "@/types/storage";
+import type { ArrearOption, ArrearRowView, PastSemesterView } from "@/types/computation";
 import { loadState, saveState } from "@/lib/storage";
-import { buildResults, programCredits, suggestedSemester } from "@/lib/cgpa";
+import {
+  addedArrearsFor,
+  arrearGradeLabel,
+  arrearOptionsFor,
+  buildResults,
+  computeSemester,
+  effectiveSemesterMode,
+  programCredits,
+  suggestedSemester,
+} from "@/lib/cgpa";
 
 const DEFAULT_COLLEGE = COLLEGES[0]!;
 const DEFAULT_DEPARTMENT_ID = "cse";
@@ -56,7 +65,6 @@ export function useCgpaStore() {
   }, [persisted, initialSelections.departmentId, initialSelections.curriculumId]);
   const [currentSemester, setCurrentSemester] = useState(initialSemester);
   const [entries, setEntries] = useState<EntriesMap>(persisted?.byCurriculum ?? {});
-  const [openSemesterNumber, setOpenSemesterNumber] = useState(initialSemester);
 
   const college = useMemo(
     () => COLLEGES.find((c) => c.id === collegeId) ?? DEFAULT_COLLEGE,
@@ -101,20 +109,76 @@ export function useCgpaStore() {
       results.computedSemesters
         .filter((c) => c.semester.number < activeSemester)
         .sort((a, b) => b.semester.number - a.semester.number)
-        .map((c) => ({
-          number: c.semester.number,
-          credits: c.creditsRegistered,
-          value: activeCurriculumEntries[c.semester.number]?.sgpa ?? "",
-        })),
-    [results.computedSemesters, activeSemester, activeCurriculumEntries],
+        .map((c) => {
+          const n = c.semester.number;
+          const entry = activeCurriculumEntries[n];
+          const mode = effectiveSemesterMode(entry, n, activeSemester);
+          return {
+            computed: c,
+            sgpaValue: entry?.sgpa ?? "",
+            mode,
+            clearedArrears: results.clearedArrears.filter((a) => a.clearedSemester === n),
+            pendingArrears: results.activeArrears.filter((a) => a.homeSemester < n),
+            addedArrears: addedArrearsFor(curriculum, activeCurriculumEntries, n),
+            arrearAddOptions: arrearOptionsFor(
+              curriculum,
+              activeCurriculumEntries,
+              activeSemester,
+              n,
+              gradeScale,
+            ),
+          };
+        }),
+    [results, activeSemester, activeCurriculumEntries, curriculum, gradeScale],
+  );
+
+  const activeEntry = activeCurriculumEntries[activeSemester];
+  const activeMode = effectiveSemesterMode(activeEntry, activeSemester, activeSemester);
+  const activeSgpaValue = activeEntry?.sgpa ?? "";
+
+  const activeClearedArrears = useMemo<ArrearRowView[]>(
+    () => results.clearedArrears.filter((a) => a.clearedSemester === activeSemester),
+    [results, activeSemester],
+  );
+  const activePendingArrears = useMemo<ArrearRowView[]>(
+    () => results.activeArrears.filter((a) => a.homeSemester < activeSemester),
+    [results, activeSemester],
+  );
+  const activeArrearAddOptions = useMemo<ArrearOption[]>(
+    () =>
+      arrearOptionsFor(
+        curriculum,
+        activeCurriculumEntries,
+        activeSemester,
+        activeSemester,
+        gradeScale,
+      ),
+    [curriculum, activeCurriculumEntries, activeSemester, gradeScale],
+  );
+  const activeAddedArrears = useMemo<ArrearRowView[]>(
+    () => addedArrearsFor(curriculum, activeCurriculumEntries, activeSemester),
+    [curriculum, activeCurriculumEntries, activeSemester],
   );
 
   const hasAnyGrades = results.totals.creditsCompleted > 0 || results.gradedSemesterCount > 0;
 
+  /** Derives an SGPA string from a semester's subject grades, if the semester has any. */
+  const sgpaFromGrades = useCallback(
+    (semesterNumber: number, entry: SemesterEntry | undefined): string | undefined => {
+      if (!entry?.grades?.some((g) => g !== null && g !== undefined)) return undefined;
+      const semester = curriculum.semesters.find((s) => s.number === semesterNumber);
+      if (!semester) return undefined;
+      const computed = computeSemester(semester, entry.grades, gradeScale, {
+        arrearPolicy: curriculum.arrearPolicy ?? "zero",
+      });
+      return computed.sgpa === null ? undefined : computed.sgpa.toFixed(2);
+    },
+    [curriculum, gradeScale],
+  );
+
   const resetToSemester = useCallback((nextCurriculum: Curriculum) => {
     const semester = suggestedSemester(nextCurriculum);
     setCurrentSemester(semester);
-    setOpenSemesterNumber(semester);
   }, []);
 
   const handleCollegeChange = useCallback(
@@ -150,14 +214,25 @@ export function useCgpaStore() {
     [department, resetToSemester],
   );
 
-  const handleSemesterSelect = useCallback((n: number) => {
-    setCurrentSemester(n);
-    setOpenSemesterNumber(n);
-  }, []);
-
-  const handleSemesterToggle = useCallback((n: number) => {
-    setOpenSemesterNumber((prev) => (prev === n ? 0 : n));
-  }, []);
+  const handleSemesterSelect = useCallback(
+    (n: number) => {
+      setCurrentSemester(n);
+      setEntries((prev) => {
+        const bySem = { ...(prev[curriculum.id] ?? {}) };
+        let changed = false;
+        for (const semester of curriculum.semesters) {
+          if (semester.number >= n) continue;
+          const derived = sgpaFromGrades(semester.number, bySem[semester.number]);
+          if (derived !== undefined) {
+            bySem[semester.number] = { ...bySem[semester.number], sgpa: derived };
+            changed = true;
+          }
+        }
+        return changed ? { ...prev, [curriculum.id]: bySem } : prev;
+      });
+    },
+    [curriculum, sgpaFromGrades],
+  );
 
   const patchSemesterEntry = useCallback(
     (semesterNumber: number, patch: Partial<SemesterEntry>) => {
@@ -170,6 +245,23 @@ export function useCgpaStore() {
     [curriculum.id],
   );
 
+  const handleModeChange = useCallback(
+    (semesterNumber: number, mode: SemesterMode) => {
+      setEntries((prev) => {
+        const bySem = { ...(prev[curriculum.id] ?? {}) };
+        const entry = bySem[semesterNumber] ?? {};
+        const next: SemesterEntry = { ...entry, mode };
+        if (mode === "sgpa") {
+          const derived = sgpaFromGrades(semesterNumber, entry);
+          if (derived !== undefined) next.sgpa = derived;
+        }
+        bySem[semesterNumber] = next;
+        return { ...prev, [curriculum.id]: bySem };
+      });
+    },
+    [curriculum.id, sgpaFromGrades],
+  );
+
   const handleGradeChange = useCallback(
     (semesterNumber: number, courseIndex: number, label: string | null) => {
       setEntries((prev) => {
@@ -177,11 +269,19 @@ export function useCgpaStore() {
         const entry = bySem[semesterNumber] ?? {};
         const arr = [...(entry.grades ?? [])];
         arr[courseIndex] = label;
-        bySem[semesterNumber] = { ...entry, grades: arr };
+
+        const semester = curriculum.semesters.find((s) => s.number === semesterNumber);
+        const course = semester?.courses[courseIndex];
+        const isArrear = label !== null && label === arrearGradeLabel(gradeScale);
+        const next: SemesterEntry = { ...entry, grades: arr };
+        if (course && entry.arrears && !isArrear) {
+          next.arrears = entry.arrears.filter((a) => a.subjectId !== course.code);
+        }
+        bySem[semesterNumber] = next;
         return { ...prev, [curriculum.id]: bySem };
       });
     },
-    [curriculum.id],
+    [curriculum.id, curriculum.semesters, gradeScale],
   );
 
   const handleSgpaChange = useCallback(
@@ -189,6 +289,122 @@ export function useCgpaStore() {
       patchSemesterEntry(semesterNumber, { sgpa: value });
     },
     [patchSemesterEntry],
+  );
+
+  const handleAddArrear = useCallback(
+    (semesterNumber: number, subjectId: string) => {
+      setEntries((prev) => {
+        const bySem = { ...(prev[curriculum.id] ?? {}) };
+        const entry = bySem[semesterNumber] ?? {};
+        const arrears = [...(entry.arrears ?? [])];
+        if (arrears.some((a) => a.subjectId === subjectId)) return prev;
+
+        const semester = curriculum.semesters.find((s) => s.number === semesterNumber);
+        const courseIndex = semester?.courses.findIndex((c) => c.code === subjectId);
+        const grades =
+          semester && courseIndex !== undefined && courseIndex >= 0
+            ? [...(entry.grades ?? [])]
+            : undefined;
+        if (grades) {
+          grades[courseIndex!] = arrearGradeLabel(gradeScale);
+        }
+        arrears.push({ subjectId });
+        bySem[semesterNumber] = {
+          ...entry,
+          ...(grades ? { grades } : {}),
+          arrears,
+        };
+        return { ...prev, [curriculum.id]: bySem };
+      });
+    },
+    [curriculum.id, curriculum.semesters, gradeScale],
+  );
+
+  const handleRemoveArrear = useCallback(
+    (semesterNumber: number, subjectId: string) => {
+      setEntries((prev) => {
+        const bySem = { ...(prev[curriculum.id] ?? {}) };
+        const entry = bySem[semesterNumber];
+        if (!entry?.arrears?.some((a) => a.subjectId === subjectId)) return prev;
+
+        const arrears = entry.arrears.filter((a) => a.subjectId !== subjectId);
+        const semester = curriculum.semesters.find((s) => s.number === semesterNumber);
+        const courseIndex = semester?.courses.findIndex((c) => c.code === subjectId);
+        const grades =
+          semester && courseIndex !== undefined && courseIndex >= 0
+            ? [...(entry.grades ?? [])]
+            : undefined;
+        if (grades && grades[courseIndex!] === arrearGradeLabel(gradeScale)) {
+          grades[courseIndex!] = null;
+        }
+        bySem[semesterNumber] = {
+          ...entry,
+          ...(grades ? { grades } : {}),
+          arrears,
+        };
+        return { ...prev, [curriculum.id]: bySem };
+      });
+    },
+    [curriculum.id, curriculum.semesters, gradeScale],
+  );
+
+  const handleClearArrear = useCallback(
+    (semesterNumber: number, subjectId: string, grade: string) => {
+      setEntries((prev) => {
+        const bySem = { ...(prev[curriculum.id] ?? {}) };
+        const entry = bySem[semesterNumber] ?? {};
+        const clearedArrears = [...(entry.clearedArrears ?? [])];
+        clearedArrears.push({ subjectId, grade });
+        bySem[semesterNumber] = { ...entry, clearedArrears };
+        return { ...prev, [curriculum.id]: bySem };
+      });
+    },
+    [curriculum.id],
+  );
+
+  const handleRemoveClearedArrear = useCallback(
+    (semesterNumber: number, subjectId: string) => {
+      setEntries((prev) => {
+        const bySem = { ...(prev[curriculum.id] ?? {}) };
+        const entry = bySem[semesterNumber];
+        if (!entry?.clearedArrears) return prev;
+        bySem[semesterNumber] = {
+          ...entry,
+          clearedArrears: entry.clearedArrears.filter((a) => a.subjectId !== subjectId),
+        };
+        return { ...prev, [curriculum.id]: bySem };
+      });
+    },
+    [curriculum.id],
+  );
+
+  const handleClearedArrearGradeChange = useCallback(
+    (semesterNumber: number, subjectId: string, grade: string) => {
+      setEntries((prev) => {
+        const bySem = { ...(prev[curriculum.id] ?? {}) };
+        const entry = bySem[semesterNumber];
+        if (!entry?.clearedArrears) return prev;
+        bySem[semesterNumber] = {
+          ...entry,
+          clearedArrears: entry.clearedArrears.map((a) =>
+            a.subjectId === subjectId ? { ...a, grade } : a,
+          ),
+        };
+        return { ...prev, [curriculum.id]: bySem };
+      });
+    },
+    [curriculum.id],
+  );
+
+  const handleClearSemester = useCallback(
+    (semesterNumber: number) => {
+      setEntries((prev) => {
+        const bySem = { ...(prev[curriculum.id] ?? {}) };
+        delete bySem[semesterNumber];
+        return { ...prev, [curriculum.id]: bySem };
+      });
+    },
+    [curriculum.id],
   );
 
   const handleReset = useCallback(() => {
@@ -209,20 +425,33 @@ export function useCgpaStore() {
     totalProgramCredits,
     totals: results.totals,
     activeComputed: results.activeComputed,
+    activeMode,
+    activeSgpaValue,
     currentSemesterSgpa: results.currentSemesterSgpa,
     previousCgpa: results.previousCgpa,
     gradedSemesterCount: results.gradedSemesterCount,
     percentage: results.percentage,
     pastSemesters,
+    activeClearedArrears,
+    activePendingArrears,
+    activeArrearAddOptions,
+    activeAddedArrears,
     hasAnyGrades,
-    openSemesterNumber,
+    activeArrearCount: results.activeArrearCount,
+    clearedArrearCount: results.clearedArrearCount,
     onCollegeChange: handleCollegeChange,
     onDepartmentChange: handleDepartmentChange,
     onCurriculumChange: handleCurriculumChange,
     onSemesterSelect: handleSemesterSelect,
-    onToggleSemester: handleSemesterToggle,
+    onModeChange: handleModeChange,
     onGradeChange: handleGradeChange,
     onSgpaChange: handleSgpaChange,
+    onAddArrear: handleAddArrear,
+    onRemoveArrear: handleRemoveArrear,
+    onClearArrear: handleClearArrear,
+    onRemoveClearedArrear: handleRemoveClearedArrear,
+    onClearedArrearGradeChange: handleClearedArrearGradeChange,
+    onClearSemester: handleClearSemester,
     onReset: handleReset,
   };
 }

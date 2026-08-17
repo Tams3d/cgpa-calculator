@@ -30,21 +30,34 @@ export default function App() {
     totalProgramCredits,
     totals,
     activeComputed,
+    activeMode,
+    activeSgpaValue,
     currentSemesterSgpa,
     previousCgpa,
     gradedSemesterCount,
     percentage,
     pastSemesters,
+    activeClearedArrears,
+    activePendingArrears,
     hasAnyGrades,
-    openSemesterNumber,
+    activeArrearCount,
+    clearedArrearCount,
     onCollegeChange,
     onDepartmentChange,
     onCurriculumChange,
     onSemesterSelect,
-    onToggleSemester,
+    onModeChange,
     onGradeChange,
     onSgpaChange,
+    onClearArrear,
+    onRemoveClearedArrear,
+    onClearedArrearGradeChange,
+    onClearSemester,
     onReset,
+    onAddArrear,
+    onRemoveArrear,
+    activeArrearAddOptions,
+    activeAddedArrears,
   } = useCgpaStore();
 
   const percentageLabel = percentageFormulaLabel(curriculum);
@@ -87,6 +100,8 @@ export default function App() {
           activeSemester={activeSemester}
           totalProgramCredits={totalProgramCredits}
           activeComputed={activeComputed}
+          activeMode={activeMode}
+          activeSgpaValue={activeSgpaValue}
           totals={totals}
           currentSemesterSgpa={currentSemesterSgpa}
           previousCgpa={previousCgpa}
@@ -94,15 +109,26 @@ export default function App() {
           percentage={percentage}
           percentageLabel={percentageLabel}
           pastSemesters={pastSemesters}
-          openSemesterNumber={openSemesterNumber}
+          activeClearedArrears={activeClearedArrears}
+          activePendingArrears={activePendingArrears}
+          activeArrearCount={activeArrearCount}
+          clearedArrearCount={clearedArrearCount}
           onCollegeChange={onCollegeChange}
           onDepartmentChange={onDepartmentChange}
           onCurriculumChange={onCurriculumChange}
           onSemesterSelect={onSemesterSelect}
-          onToggleSemester={onToggleSemester}
+          onModeChange={onModeChange}
           onGradeChange={onGradeChange}
           onSgpaChange={onSgpaChange}
+          onClearArrear={onClearArrear}
+          onRemoveClearedArrear={onRemoveClearedArrear}
+          onClearedArrearGradeChange={onClearedArrearGradeChange}
+          onClearSemester={onClearSemester}
           onReset={onReset}
+          onAddArrear={onAddArrear}
+          onRemoveArrear={onRemoveArrear}
+          arrearAddOptions={activeArrearAddOptions}
+          addedArrears={activeAddedArrears}
         />
 
         <FaqSection />

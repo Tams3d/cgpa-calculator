@@ -71,7 +71,7 @@ export const SgpaInput = memo(function SgpaInput({
         }}
         placeholder="8.50"
         className={cn(
-          "h-11 w-28 rounded-lg border border-input bg-card px-3 text-right font-display text-base font-semibold tabular-nums shadow-sm transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background",
+          "h-9 w-24 rounded-md border border-input bg-card px-3 text-right font-display text-base font-semibold tabular-nums shadow-sm transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background",
           invalid && "border-destructive",
           !invalid && value !== "" && "text-success",
           className,
