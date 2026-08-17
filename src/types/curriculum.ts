@@ -57,5 +57,10 @@ export interface College {
   shortName: string;
   /** Whether full curriculum data is live. Unavailable colleges show as "Coming soon" and are disabled. */
   available?: boolean;
+  /**
+   * Whether the college sets its own curriculum (autonomous) or follows its
+   * affiliating university's common curriculum (non-autonomous).
+   */
+  autonomy: "autonomous" | "non-autonomous";
   departments: Department[];
 }

@@ -82,7 +82,12 @@ function ArrearAddControl({
   const [subjectId, setSubjectId] = useState<string | null>(null);
 
   const items = options.map((o) => ({
-    label: `${o.code} \u00B7 ${o.title}`,
+    label: (
+      <span className="flex items-center gap-1.5">
+        <span className="hidden font-mono sm:inline">{o.code}</span>
+        <span className="font-normal">{o.title}</span>
+      </span>
+    ),
     value: o.code,
   }));
 
@@ -91,38 +96,44 @@ function ArrearAddControl({
   return (
     <div className="flex w-full flex-col gap-2 rounded-lg border border-dashed border-border bg-secondary/30 p-3">
       {canAdd ? (
-        <div className="flex w-full flex-col gap-2 sm:flex-row sm:items-center">
-          <Select items={items} value={subjectId} onValueChange={(v) => setSubjectId(v ?? null)}>
-            <SelectTrigger
-              aria-label="Arrear subject"
-              className="w-full bg-background sm:min-w-0 sm:flex-1"
-            >
-              <SelectValue placeholder="Choose a subject" />
-            </SelectTrigger>
-            <SelectContent>
-              {items.map((item) => (
-                <SelectItem key={item.value} value={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <div className="flex items-center justify-end gap-2 sm:justify-start">
-            <Button
-              type="button"
-              size="sm"
-              disabled={subjectId === null}
-              onClick={() => {
-                if (subjectId) {
-                  onAdd(subjectId);
-                  setSubjectId(null);
-                }
-              }}
-            >
-              Add
-            </Button>
+        <>
+          <span className="text-sm font-semibold text-foreground sm:hidden">
+            Add arrear subject
+          </span>
+          <div className="flex w-full flex-col gap-2 sm:flex-row sm:items-center">
+            <Select items={items} value={subjectId} onValueChange={(v) => setSubjectId(v ?? null)}>
+              <SelectTrigger
+                aria-label="Arrear subject"
+                className="w-full bg-background sm:min-w-0 sm:flex-1"
+              >
+                <SelectValue placeholder="Choose a subject" />
+              </SelectTrigger>
+              <SelectContent>
+                {items.map((item) => (
+                  <SelectItem key={item.value} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <div className="flex w-full items-center justify-end gap-2 sm:w-auto sm:justify-start">
+              <Button
+                type="button"
+                size="sm"
+                className="w-full sm:w-auto"
+                disabled={subjectId === null}
+                onClick={() => {
+                  if (subjectId) {
+                    onAdd(subjectId);
+                    setSubjectId(null);
+                  }
+                }}
+              >
+                Add
+              </Button>
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         <p className="text-xs font-medium text-muted-foreground">
           No subjects left to mark as arrear

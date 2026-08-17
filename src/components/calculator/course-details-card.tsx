@@ -168,6 +168,15 @@ export const CourseDetailsCard = memo(function CourseDetailsCard({
         <div className="flex flex-col gap-2">
           <FieldLabel>Regulation &amp; grading</FieldLabel>
           <div className="flex flex-wrap gap-2">
+            <Badge
+              variant="outline"
+              className={cn(
+                "border-muted-foreground/50 text-muted-foreground",
+                college.autonomy === "autonomous" && "border-info text-info",
+              )}
+            >
+              {college.autonomy === "autonomous" ? "Autonomous" : "Non-autonomous"}
+            </Badge>
             <Badge variant="outline" className="border-primary text-primary">
               {curriculum.regulation}
             </Badge>
