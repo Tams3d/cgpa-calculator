@@ -203,7 +203,7 @@ function ArrearRow({
         <Badge
           variant="outline"
           className={cn(
-            "w-14 shrink-0 justify-center border-foreground/20 font-mono text-[11px] tracking-wide uppercase",
+            "w-14 shrink-0 justify-center border-foreground/20 font-mono text-[11px] tracking-wide uppercase sm:w-auto",
             cleared && "border-success/40 text-success",
           )}
         >
@@ -274,12 +274,14 @@ function ClearedArrearsSection({
   onRemove,
   onGradeChange,
 }: ClearedArrearsSectionProps) {
-  const isEmpty = clearedArrears.length === 0 && pendingArrears.length === 0;
+  const hasClearedArrears = clearedArrears.length > 0;
+  const hasPendingArrears = pendingArrears.length > 0;
+  const isEmpty = !hasClearedArrears && !hasPendingArrears;
   return (
     <div className="flex flex-col gap-3 border-t border-border pt-5">
       <div className="flex items-center justify-between gap-3">
         <FieldLabel>Cleared Arrears</FieldLabel>
-        {clearedArrears.length > 0 && <Badge variant="success">{clearedArrears.length}</Badge>}
+        {hasClearedArrears && <Badge variant="success">{clearedArrears.length}</Badge>}
       </div>
       {isEmpty && (
         <p className="text-xs text-muted-foreground">No arrears carried from earlier semesters.</p>
@@ -386,7 +388,7 @@ export const SemesterCard = memo(function SemesterCard({
             {computed.creditsRegistered} credits
           </Badge>
         </div>
-        <div className="flex shrink-0 items-center gap-1.5">
+        <div className="flex shrink-0 items-center gap-2">
           {computed.sgpa !== null ? (
             <Badge variant="success" className="font-display text-sm tabular-nums">
               SGPA {formatDecimal(computed.sgpa)}
